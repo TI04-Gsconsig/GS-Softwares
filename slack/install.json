@@ -13,10 +13,10 @@
     "./slack/install.sh"
   ],
   "remove_commands": [
-    "flatpak uninstall -y com.slack.Slack"
+    "flatpak uninstall --user --noninteractive -y com.slack.Slack"
   ],
   "update_commands": [
-    "flatpak update -y com.slack.Slack"
+    "flatpak update --user --noninteractive -y com.slack.Slack"
   ],
   "download_urls": [],
   "flatpak_ref": "com.slack.Slack"

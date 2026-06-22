@@ -32,9 +32,10 @@ SOFTWARE = [
         "keywords": ["cursor", "ide", "editor", "ia"],
         "install_method": "deb",
         "dependencies": ["curl", "dpkg"],
-        "download_url": "https://downloads.cursor.com/aptrepo/pool/c/cu/cursor_0.48.8_amd64.deb",
+        "download_url": "https://api2.cursor.sh/updates/download/golden/linux-x64-deb/cursor/latest",
+        "download_mode": "latest",
         "download_sha256": "",
-        "deb_note": "Atualize download_url em install.json quando houver nova versao oficial.",
+        "deb_note": "URL oficial sempre aponta para a versao mais recente do Cursor.",
     },
     {
         "slug": "whatsapp-web",
@@ -85,7 +86,8 @@ SOFTWARE = [
         "keywords": ["ads", "adspower", "ads power", "antidetect", "browser"],
         "install_method": "deb",
         "dependencies": ["curl", "dpkg"],
-        "download_url": "https://version.adspower.net/software/linux-x64-global/AdsPower-Global-5.12.28-x64.deb",
+        "download_url": "",
+        "download_mode": "dynamic",
         "download_sha256": "",
         "deb_note": "Confira a URL mais recente em https://www.adspower.com/download antes de instalar.",
     },
@@ -153,28 +155,34 @@ Consulte `install.json` (`remove_commands`) ou execute `./install.sh --uninstall
 """
 
 
+LIB_SOURCE = """if ! declare -F gs_install_deb_from_url >/dev/null 2>&1 && ! declare -F gs_flatpak_install_user >/dev/null 2>&1; then
+  _gs_tools=""
+  if [[ -n "${BASH_SOURCE[0]:-}" ]]; then
+    _gs_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")/../tools" 2>/dev/null && pwd || true)"
+  fi
+  if [[ -z "$_gs_tools" || ! -f "$_gs_tools/install_lib.sh" ]]; then
+    echo "Biblioteca GS install_lib.sh nao encontrada" >&2
+    exit 1
+  fi
+  source "$_gs_tools/install_lib.sh"
+fi
+"""
+
+
 def install_sh(slug: str, item: dict) -> str:
     method = item["install_method"]
     if method == "flatpak":
         ref = item["flatpak_ref"]
         return f"""#!/bin/bash
 set -euo pipefail
-REF={json.dumps(ref)}
-if ! command -v flatpak >/dev/null 2>&1; then
-  echo "Instalando flatpak..." >&2
-  sudo apt-get update -qq
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y flatpak
-fi
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1 || true
-flatpak install --noninteractive -y flathub "$REF"
+{LIB_SOURCE}gs_flatpak_install_user {json.dumps(ref)} "flathub"
 echo "{item['name']} instalado via Flatpak"
 """
     if method == "apt":
         pkgs = item["apt_packages"]
         return f"""#!/bin/bash
 set -euo pipefail
-sudo apt-get update -qq
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y {pkgs}
+{LIB_SOURCE}gs_install_apt_packages {pkgs}
 echo "{item['name']} instalado via apt"
 """
     if method == "webapp":
@@ -214,21 +222,31 @@ for desk in "$HOME/Desktop" "$HOME/Área de trabalho" "$HOME/Area de Trabalho"; 
 done
 echo "WhatsApp Web instalado"
 """
+    if slug == "ads-power":
+        return f"""#!/bin/bash
+set -euo pipefail
+{LIB_SOURCE}TMP="/tmp/gs-ads-power.deb"
+gs_install_deb_from_adspower_latest "$TMP"
+echo "{item['name']} instalado"
+"""
+    if slug == "cursor":
+        url = item.get(
+            "download_url",
+            "https://api2.cursor.sh/updates/download/golden/linux-x64-deb/cursor/latest",
+        )
+        return f"""#!/bin/bash
+set -euo pipefail
+{LIB_SOURCE}TMP="/tmp/gs-{slug}.deb"
+URL={json.dumps(url)}
+gs_install_deb_from_url "$URL" "$TMP"
+echo "{item['name']} instalado"
+"""
     url = item.get("download_url", "")
-    note = item.get("deb_note", "")
-    sha = item.get("download_sha256", "")
-    verify = ""
-    if sha:
-        verify = f'echo "{sha}  /tmp/gs-{slug}.deb" | sha256sum -c -'
     return f"""#!/bin/bash
 set -euo pipefail
+{LIB_SOURCE}TMP="/tmp/gs-{slug}.deb"
 URL={json.dumps(url)}
-TMP="/tmp/gs-{slug}.deb"
-{("# " + note) if note else ""}
-curl -fsSL --retry 3 --connect-timeout 30 -o "$TMP" "$URL"
-{verify}
-sudo dpkg -i "$TMP" || sudo apt-get install -f -y
-rm -f "$TMP"
+gs_install_deb_from_url "$URL" "$TMP"
 echo "{item['name']} instalado"
 """
 
@@ -251,18 +269,24 @@ def build_install_json(item: dict) -> dict:
     }
     if method == "flatpak":
         base["flatpak_ref"] = item["flatpak_ref"]
-        base["remove_commands"] = [f"flatpak uninstall -y {item['flatpak_ref']}"]
-        base["update_commands"] = [f"flatpak update -y {item['flatpak_ref']}"]
+        base["remove_commands"] = [f"flatpak uninstall --user --noninteractive -y {item['flatpak_ref']}"]
+        base["update_commands"] = [f"flatpak update --user --noninteractive -y {item['flatpak_ref']}"]
     elif method == "apt":
         base["apt_packages"] = item["apt_packages"]
         base["remove_commands"] = [
-            f"sudo apt-get remove -y {item['apt_packages'].split()[0]}"
+            f"apt-get remove -y {item['apt_packages'].split()[0]}"
         ]
     elif method == "deb":
-        base["download_urls"] = [item.get("download_url", "")]
+        if item.get("download_mode"):
+            base["download_mode"] = item["download_mode"]
+        if item.get("download_url"):
+            base["download_urls"] = [item.get("download_url", "")]
         if item.get("download_sha256"):
             base["download_sha256"] = item["download_sha256"]
-        base["remove_commands"] = [f"sudo apt-get remove -y {slug}"]
+        remove_pkg = item.get("apt_remove") or item.get("deb_package") or slug
+        if slug == "google-chrome":
+            remove_pkg = "google-chrome-stable"
+        base["remove_commands"] = [f"apt-get remove -y {remove_pkg}"]
     elif method == "webapp":
         base["webapp_url"] = "https://web.whatsapp.com"
         base["remove_commands"] = ["rm -f $HOME/.local/share/applications/whatsapp-web.desktop"]

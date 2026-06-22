@@ -13,12 +13,11 @@
     "./ads-power/install.sh"
   ],
   "remove_commands": [
-    "sudo apt-get remove -y ads-power"
+    "apt-get remove -y adspower-global || apt-get remove -y ads-power || true"
   ],
   "update_commands": [
     "./ads-power/install.sh"
   ],
-  "download_urls": [
-    "https://version.adspower.net/software/linux-x64-global/AdsPower-Global-5.12.28-x64.deb"
-  ]
+  "download_urls": [],
+  "download_mode": "dynamic"
 }

@@ -13,12 +13,13 @@
     "./cursor/install.sh"
   ],
   "remove_commands": [
-    "sudo apt-get remove -y cursor"
+    "apt-get remove -y cursor"
   ],
   "update_commands": [
     "./cursor/install.sh"
   ],
   "download_urls": [
-    "https://downloads.cursor.com/aptrepo/pool/c/cu/cursor_0.48.8_amd64.deb"
-  ]
+    "https://api2.cursor.sh/updates/download/golden/linux-x64-deb/cursor/latest"
+  ],
+  "download_mode": "latest"
 }

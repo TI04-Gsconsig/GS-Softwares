@@ -14,7 +14,7 @@
     "./google-chrome/install.sh"
   ],
   "remove_commands": [
-    "sudo apt-get remove -y google-chrome"
+    "apt-get remove -y google-chrome-stable"
   ],
   "update_commands": [
     "./google-chrome/install.sh"

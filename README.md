@@ -44,11 +44,13 @@ python3 tools/bootstrap_catalog.py
 Configure no ambiente (ou `~/.config/pc-fleet/`):
 
 ```bash
-export GS_SOFTWARES_REPO="TI05-GSCONSIG/GS-Softwares"
+export GS_SOFTWARES_REPO="TI04-Gsconsig/GS-Softwares"
 export GS_SOFTWARES_BRANCH="main"
 ```
 
 A aba **Software** consulta `catalog.json` e os arquivos de cada pasta via GitHub (com cache local).
+
+Quando a organizacao **TI05-GSCONSIG** estiver disponivel, altere `GS_SOFTWARES_REPO` para `TI05-GSCONSIG/GS-Softwares`.
 
 ## Licenca
 

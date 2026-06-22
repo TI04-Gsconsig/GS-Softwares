@@ -1,10 +1,17 @@
 #!/bin/bash
 set -euo pipefail
-URL="https://version.adspower.net/software/linux-x64-global/AdsPower-Global-5.12.28-x64.deb"
+if ! declare -F gs_install_deb_from_url >/dev/null 2>&1; then
+  _gs_tools=""
+  if [[ -n "${BASH_SOURCE[0]:-}" ]]; then
+    _gs_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")/../tools" 2>/dev/null && pwd || true)"
+  fi
+  if [[ -z "$_gs_tools" || ! -f "$_gs_tools/install_lib.sh" ]]; then
+    echo "Biblioteca GS install_lib.sh nao encontrada" >&2
+    exit 1
+  fi
+  # shellcheck source=/dev/null
+  source "$_gs_tools/install_lib.sh"
+fi
 TMP="/tmp/gs-ads-power.deb"
-# Confira a URL mais recente em https://www.adspower.com/download antes de instalar.
-curl -fsSL --retry 3 --connect-timeout 30 -o "$TMP" "$URL"
-
-sudo dpkg -i "$TMP" || sudo apt-get install -f -y
-rm -f "$TMP"
+gs_install_deb_from_adspower_latest "$TMP"
 echo "ADS Power instalado"

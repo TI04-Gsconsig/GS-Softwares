@@ -12,7 +12,7 @@
     "./remmina/install.sh"
   ],
   "remove_commands": [
-    "sudo apt-get remove -y remmina"
+    "apt-get remove -y remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-secret"
   ],
   "update_commands": [
     "./remmina/install.sh"

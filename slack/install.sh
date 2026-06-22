@@ -1,11 +1,16 @@
 #!/bin/bash
 set -euo pipefail
-REF="com.slack.Slack"
-if ! command -v flatpak >/dev/null 2>&1; then
-  echo "Instalando flatpak..." >&2
-  sudo apt-get update -qq
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y flatpak
+if ! declare -F gs_flatpak_install_user >/dev/null 2>&1; then
+  _gs_tools=""
+  if [[ -n "${BASH_SOURCE[0]:-}" ]]; then
+    _gs_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")/../tools" 2>/dev/null && pwd || true)"
+  fi
+  if [[ -z "$_gs_tools" || ! -f "$_gs_tools/install_lib.sh" ]]; then
+    echo "Biblioteca GS install_lib.sh nao encontrada" >&2
+    exit 1
+  fi
+  # shellcheck source=/dev/null
+  source "$_gs_tools/install_lib.sh"
 fi
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1 || true
-flatpak install --noninteractive -y flathub "$REF"
+gs_flatpak_install_user "com.slack.Slack" "flathub"
 echo "Slack instalado via Flatpak"
