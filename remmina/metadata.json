@@ -1,0 +1,23 @@
+{
+  "id": "remmina",
+  "slug": "remmina",
+  "name": "Remmina",
+  "version": "repo",
+  "developer": "Remmina Project",
+  "official_url": "https://remmina.org/",
+  "description": "Cliente de desktop remoto (RDP, VNC, SSH) para suporte e operacao.",
+  "summary": "Cliente de desktop remoto (RDP, VNC, SSH) para suporte e operacao.",
+  "purpose": "Acesso remoto a PCs da frota e servidores.",
+  "keywords": [
+    "remmina",
+    "vnc",
+    "rdp",
+    "remote",
+    "desktop"
+  ],
+  "category": "corporate",
+  "platform": "linux-mint",
+  "install_method": "apt",
+  "icon": "downloads/icon.svg",
+  "catalog_source": "GS-Softwares"
+}

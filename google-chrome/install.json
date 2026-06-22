@@ -1,0 +1,25 @@
+{
+  "name": "Google Chrome",
+  "slug": "google-chrome",
+  "version": "stable",
+  "developer": "Google",
+  "official_url": "https://www.google.com/chrome/",
+  "install_method": "deb",
+  "dependencies": [
+    "curl",
+    "dpkg",
+    "apt"
+  ],
+  "install_commands": [
+    "./google-chrome/install.sh"
+  ],
+  "remove_commands": [
+    "sudo apt-get remove -y google-chrome"
+  ],
+  "update_commands": [
+    "./google-chrome/install.sh"
+  ],
+  "download_urls": [
+    "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+  ]
+}

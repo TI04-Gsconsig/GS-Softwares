@@ -1,0 +1,24 @@
+{
+  "name": "Cursor",
+  "slug": "cursor",
+  "version": "latest",
+  "developer": "Anysphere",
+  "official_url": "https://cursor.com/download",
+  "install_method": "deb",
+  "dependencies": [
+    "curl",
+    "dpkg"
+  ],
+  "install_commands": [
+    "./cursor/install.sh"
+  ],
+  "remove_commands": [
+    "sudo apt-get remove -y cursor"
+  ],
+  "update_commands": [
+    "./cursor/install.sh"
+  ],
+  "download_urls": [
+    "https://downloads.cursor.com/aptrepo/pool/c/cu/cursor_0.48.8_amd64.deb"
+  ]
+}

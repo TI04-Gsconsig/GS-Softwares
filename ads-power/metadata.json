@@ -1,0 +1,23 @@
+{
+  "id": "ads-power",
+  "slug": "ads-power",
+  "name": "ADS Power",
+  "version": "latest",
+  "developer": "AdsPower",
+  "official_url": "https://www.adspower.com/download",
+  "description": "Navegador antidetect para multiplos perfis e automacao.",
+  "summary": "Navegador antidetect para multiplos perfis e automacao.",
+  "purpose": "Gestao de perfis de navegador para operacoes comerciais.",
+  "keywords": [
+    "ads",
+    "adspower",
+    "ads power",
+    "antidetect",
+    "browser"
+  ],
+  "category": "corporate",
+  "platform": "linux-mint",
+  "install_method": "deb",
+  "icon": "downloads/icon.svg",
+  "catalog_source": "GS-Softwares"
+}

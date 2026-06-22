@@ -1,0 +1,22 @@
+{
+  "id": "google-chrome",
+  "slug": "google-chrome",
+  "name": "Google Chrome",
+  "version": "stable",
+  "developer": "Google",
+  "official_url": "https://www.google.com/chrome/",
+  "description": "Navegador web oficial do Google para Linux.",
+  "summary": "Navegador web oficial do Google para Linux.",
+  "purpose": "Navegacao, apps web e compatibilidade corporativa.",
+  "keywords": [
+    "chrome",
+    "google",
+    "navegador",
+    "browser"
+  ],
+  "category": "corporate",
+  "platform": "linux-mint",
+  "install_method": "deb",
+  "icon": "downloads/icon.svg",
+  "catalog_source": "GS-Softwares"
+}

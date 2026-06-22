@@ -1,0 +1,8 @@
+# Cache local da Frota de PCs (nao versionar)
+.cache/
+
+# SO / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp

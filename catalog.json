@@ -1,0 +1,13 @@
+{
+  "catalog_version": 1,
+  "name": "GS-Softwares",
+  "description": "Catalogo corporativo de softwares para Linux Mint",
+  "software": [
+    "slack",
+    "cursor",
+    "whatsapp-web",
+    "google-chrome",
+    "remmina",
+    "ads-power"
+  ]
+}

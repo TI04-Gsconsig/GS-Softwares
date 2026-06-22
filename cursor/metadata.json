@@ -1,0 +1,22 @@
+{
+  "id": "cursor",
+  "slug": "cursor",
+  "name": "Cursor",
+  "version": "latest",
+  "developer": "Anysphere",
+  "official_url": "https://cursor.com/download",
+  "description": "Editor de codigo com assistente de IA integrado.",
+  "summary": "Editor de codigo com assistente de IA integrado.",
+  "purpose": "Desenvolvimento de software com produtividade e IA.",
+  "keywords": [
+    "cursor",
+    "ide",
+    "editor",
+    "ia"
+  ],
+  "category": "corporate",
+  "platform": "linux-mint",
+  "install_method": "deb",
+  "icon": "downloads/icon.svg",
+  "catalog_source": "GS-Softwares"
+}

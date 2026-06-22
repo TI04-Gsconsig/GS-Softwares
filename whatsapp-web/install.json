@@ -1,0 +1,22 @@
+{
+  "name": "WhatsApp Web",
+  "slug": "whatsapp-web",
+  "version": "web",
+  "developer": "Meta",
+  "official_url": "https://web.whatsapp.com",
+  "install_method": "webapp",
+  "dependencies": [
+    "google-chrome ou chromium"
+  ],
+  "install_commands": [
+    "./whatsapp-web/install.sh"
+  ],
+  "remove_commands": [
+    "rm -f $HOME/.local/share/applications/whatsapp-web.desktop"
+  ],
+  "update_commands": [
+    "./whatsapp-web/install.sh"
+  ],
+  "download_urls": [],
+  "webapp_url": "https://web.whatsapp.com"
+}

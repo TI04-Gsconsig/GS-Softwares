@@ -1,0 +1,24 @@
+{
+  "name": "ADS Power",
+  "slug": "ads-power",
+  "version": "latest",
+  "developer": "AdsPower",
+  "official_url": "https://www.adspower.com/download",
+  "install_method": "deb",
+  "dependencies": [
+    "curl",
+    "dpkg"
+  ],
+  "install_commands": [
+    "./ads-power/install.sh"
+  ],
+  "remove_commands": [
+    "sudo apt-get remove -y ads-power"
+  ],
+  "update_commands": [
+    "./ads-power/install.sh"
+  ],
+  "download_urls": [
+    "https://version.adspower.net/software/linux-x64-global/AdsPower-Global-5.12.28-x64.deb"
+  ]
+}

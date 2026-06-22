@@ -1,0 +1,22 @@
+{
+  "id": "whatsapp-web",
+  "slug": "whatsapp-web",
+  "name": "WhatsApp Web",
+  "version": "web",
+  "developer": "Meta",
+  "official_url": "https://web.whatsapp.com",
+  "description": "Atalho do WhatsApp Web no navegador, como aplicativo na area de trabalho.",
+  "summary": "Atalho do WhatsApp Web no navegador, como aplicativo na area de trabalho.",
+  "purpose": "Acesso rapido ao WhatsApp corporativo sem instalar app nativo.",
+  "keywords": [
+    "whatsapp",
+    "whats",
+    "web",
+    "wa"
+  ],
+  "category": "corporate",
+  "platform": "linux-mint",
+  "install_method": "webapp",
+  "icon": "downloads/icon.svg",
+  "catalog_source": "GS-Softwares"
+}

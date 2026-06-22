@@ -1,0 +1,22 @@
+{
+  "id": "slack",
+  "slug": "slack",
+  "name": "Slack",
+  "version": "4.39",
+  "developer": "Slack Technologies",
+  "official_url": "https://slack.com/downloads/linux",
+  "description": "Comunicacao corporativa por canais, mensagens e integracoes.",
+  "summary": "Comunicacao corporativa por canais, mensagens e integracoes.",
+  "purpose": "Centralizar conversas da equipe com historico e busca.",
+  "keywords": [
+    "slack",
+    "sl",
+    "comunicacao",
+    "chat"
+  ],
+  "category": "corporate",
+  "platform": "linux-mint",
+  "install_method": "flatpak",
+  "icon": "downloads/icon.svg",
+  "catalog_source": "GS-Softwares"
+}

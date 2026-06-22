@@ -1,0 +1,23 @@
+{
+  "name": "Slack",
+  "slug": "slack",
+  "version": "4.39",
+  "developer": "Slack Technologies",
+  "official_url": "https://slack.com/downloads/linux",
+  "install_method": "flatpak",
+  "dependencies": [
+    "flatpak",
+    "flathub"
+  ],
+  "install_commands": [
+    "./slack/install.sh"
+  ],
+  "remove_commands": [
+    "flatpak uninstall -y com.slack.Slack"
+  ],
+  "update_commands": [
+    "flatpak update -y com.slack.Slack"
+  ],
+  "download_urls": [],
+  "flatpak_ref": "com.slack.Slack"
+}

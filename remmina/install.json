@@ -1,0 +1,22 @@
+{
+  "name": "Remmina",
+  "slug": "remmina",
+  "version": "repo",
+  "developer": "Remmina Project",
+  "official_url": "https://remmina.org/",
+  "install_method": "apt",
+  "dependencies": [
+    "apt"
+  ],
+  "install_commands": [
+    "./remmina/install.sh"
+  ],
+  "remove_commands": [
+    "sudo apt-get remove -y remmina"
+  ],
+  "update_commands": [
+    "./remmina/install.sh"
+  ],
+  "download_urls": [],
+  "apt_packages": "remmina remmina-plugin-vnc remmina-plugin-rdp remmina-plugin-secret"
+}
